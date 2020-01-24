@@ -323,7 +323,29 @@ public class EvaluationService {
 	 */
 	public String toPigLatin(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		
+		String[] words = string.split("\\W+");
+		
+
+		for (int i = 0; i < words.length; i++) {
+
+			if (words[i].toLowerCase().matches("[^aeiou]qu.*"))
+				words[i] = words[i].substring(3, words[i].length()) + words[i].substring(0, 3) + "ay";
+
+			else if (words[i].toLowerCase().matches("(sch|thr).*"))
+				words[i] = words[i].substring(3, words[i].length()) + words[i].substring(0, 3) + "ay";
+
+			else if (words[i].toLowerCase().matches("(th|qu|ch).*"))
+				words[i] = words[i].substring(2, words[i].length()) + words[i].substring(0, 2) + "ay";
+
+			else if (words[i].toLowerCase().matches("([aeiou]|(xr|yt)).*"))
+				words[i] = words[i] + "ay";
+			else
+				words[i] = words[i].substring(1, words[i].length()) + String.valueOf(words[i].charAt(0)) + "ay";
+
+		}
+		return String.join(" ", words);
+		
 	}
 
 	/**
