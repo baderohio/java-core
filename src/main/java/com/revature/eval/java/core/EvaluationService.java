@@ -484,7 +484,29 @@ public class EvaluationService {
 
 		public String rotate(String string) {
 			// TODO Write an implementation for this method declaration
-			return null;
+			
+			String newString = "";
+			int shifted = 0;
+			char test[] = string.toCharArray();
+			for (int s = 0; s < test.length; s++) {
+
+				if (test[s] >= 65 && test[s] <= 90) {
+					shifted = 65 + (test[s] - 65 + key) % 26;
+					newString += String.valueOf((char) shifted);
+				}
+
+				if (test[s] >= 97 && test[s] <= 122) {
+					shifted = 97 + (test[s] - 97 + key) % 26;
+					newString += String.valueOf((char) shifted);
+				}
+				if (!(test[s] >= 65 && test[s] <= 90) && !(test[s] >= 97 && test[s] <= 122)) {
+					newString += test[s];
+				}
+			}
+			
+
+			return newString;
+			
 		}
 
 	}
