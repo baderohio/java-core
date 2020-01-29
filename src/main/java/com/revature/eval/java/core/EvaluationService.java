@@ -639,7 +639,19 @@ public class EvaluationService {
 	 */
 	public boolean isValidIsbn(String string) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		int result = 0;
+		int factor = 10;
+		string = string.replace("-", "");
+		for (char c : string.toCharArray()) {
+			if (Character.isDigit(c))
+				result += factor * ((int) c - (int) '0');
+			else if (c == 'X' && factor == 1)
+				result += 10;
+			else
+				return false;
+			--factor;
+		}
+		return (factor == 0 && result % 11 == 0);
 	}
 
 	/**
