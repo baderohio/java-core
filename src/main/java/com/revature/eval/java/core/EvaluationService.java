@@ -525,7 +525,32 @@ public class EvaluationService {
 	 */
 	public int calculateNthPrime(int i) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		
+		List<Integer> primes = new ArrayList<>();
+		if (i == 0) {
+			throw new IllegalArgumentException("Inputed Zero!");
+		}
+		int result = 0;
+		if (primes.size() == 0) {
+			primes.add(2);
+		}
+		int last = primes.get(primes.size() - 1);
+		while (primes.size() < i) {
+			boolean found = false;
+			for (int prime : primes) {
+				if (last % prime == 0) {
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				primes.add(last);
+			}
+			last++;
+		}
+		result = primes.get(i - 1);
+		return result;
+		
 	}
 
 	/**
@@ -561,8 +586,20 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			
+			StringBuilder sb = new StringBuilder(string.length());
+			for (char ch : string.toLowerCase().toCharArray()) {
+				if (Character.isDigit(ch)) {
+					sb.append(ch);
+				} else if (Character.isAlphabetic(ch)) {
+					sb.append((char) ('z' - ch + 'a'));
+				}
+				if ((sb.length() + 1) % 6 == 0) {
+					sb.append(" ");
+				}
+			}
+			return sb.toString().trim();
+			
 		}
 
 		/**
