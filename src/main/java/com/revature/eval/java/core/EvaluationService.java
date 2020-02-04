@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -824,7 +825,48 @@ public class EvaluationService {
 	 */
 	public int solveWordProblem(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		////////////
+		String operator = "";
+		int arr[] = new int[2];
+		boolean didItRun = false;
+		List<String> tokens = new ArrayList<>(Arrays.asList(string.toLowerCase().split("[ ,?]")));
+		for (String i : tokens) {
+			if (i.indexOf("minus") == 0) {
+				operator = "minus";
+			} else if (i.indexOf("plus") == 0) {
+				operator = "plus";
+			} else if (i.indexOf("multiplied") == 0) {
+				operator = "multiplied";
+			} else if (i.indexOf("divided") == 0) {
+				operator = "divided";
+			}
+
+			if (i.matches("-*\\d+")) {
+				if (didItRun == false) {
+					arr[0] = Integer.parseInt(i);
+					didItRun = true;
+				} else if (didItRun == true) {
+					arr[1] = Integer.parseInt(i);
+				}
+			}
+		}
+		switch (operator) {
+		case "minus":
+			return (arr[0] - arr[1]);
+		case "plus":
+			return (arr[0] + arr[1]);
+		case "multiplied":
+			return (arr[0] * arr[1]);
+		case "divided":
+			return (arr[0] / arr[1]);
+
+		default:
+			throw new IllegalArgumentException("Input in the correct format!");
+		}
 	}
 
-}
+		////////////
+		//return 0;
+	}
+
+
