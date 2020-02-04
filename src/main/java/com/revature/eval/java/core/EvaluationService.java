@@ -776,7 +776,23 @@ public class EvaluationService {
 	 */
 	public boolean isLuhnValid(String string) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		/////////
+		string = string.replace(" ", "");
+		int luhnSum = 0;
+		int pos = 0;
+		int num = 0;
+		for (int i = 0; i < string.length(); i++) {
+			pos = string.length() - 1 - i;
+			num = Character.getNumericValue(string.charAt(pos));
+			if ((i + 1) % 2 == 0) {
+				luhnSum += 2 * num > 9 ? 2 * num - 9 : 2 * num;
+			} else {
+				luhnSum += num;
+			}
+		}
+		return (luhnSum % 10 == 0);
+		/////////
+		//return false;
 	}
 
 	/**
