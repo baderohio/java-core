@@ -1,5 +1,8 @@
 package com.revature.eval.java.core;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -690,7 +693,16 @@ public class EvaluationService {
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		
+		long giga = 1_000_000_000l;
+		try {
+			return given.plus(giga, ChronoUnit.SECONDS);
+		} catch (Exception e) {
+			LocalDateTime addTime = ((LocalDate) given).atStartOfDay();
+			Temporal withTime = addTime;
+			return withTime.plus(giga, ChronoUnit.SECONDS);
+		}
+		
 	}
 
 	/**
@@ -708,7 +720,22 @@ public class EvaluationService {
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		
+		int total = 0;
+		for (int k = 1; k < i; k++) {
+			boolean isMultiple = false;
+			for (int j : set) {
+				if (k % j == 0) {
+					isMultiple = true;
+				}
+			}
+			if (isMultiple) {
+				total += k;
+			}
+		}
+		return total;
+		
+		
 	}
 
 	/**
