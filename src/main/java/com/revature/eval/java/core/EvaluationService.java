@@ -669,7 +669,15 @@ public class EvaluationService {
 	 */
 	public boolean isPangram(String string) {
 		// TODO Write an implementation for this method declaration
-		return false;
+		
+		for (char c = 'a'; c <= 'z'; c++) {
+			if (string.toLowerCase().indexOf(c) < 0)
+				return false;
+		}
+
+		return true;
+		
+		
 	}
 
 	/**
